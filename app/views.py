@@ -14,7 +14,7 @@ from .forms import UploadForm
 # Routing for your application.
 ###
 
-@app.route('/api/upload', methods='POST')
+@app.route('/api/upload', methods=['POST'])
 def upload():
 
     form=UploadForm()
@@ -27,10 +27,11 @@ def upload():
         
         fileob={"message":"File Upload Successful", "filename":filename, "desciption":description}
         return jsonify(fileob)
-    else:
-       fileob = {"errors": [{form_errors(form)},{}]}
-       return jsonify(fileob)
+    
+    fileob = form_errors(form)
+    return jsonify(fileob)
 
+    
 
 
 
